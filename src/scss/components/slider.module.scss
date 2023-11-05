@@ -1,0 +1,53 @@
+.slide {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  height: 828px;
+  .container {
+    position: relative;
+    .containerText {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      svg {
+        margin-bottom: 44px;
+      }
+      span {
+        margin-top: 22px;
+        font-size: 48px;
+        color: #565656;
+      }
+      .button {
+        margin-top: 34px;
+        transition: all 400ms;
+        &:hover {
+          transition: all 400ms;
+          background-color: #272727;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+
+.imageA,
+.imageB {
+  object-fit: cover;
+  object-position: right;
+  width: 100%;
+  height: 828px;
+}
+
+.imageA {
+  width: 60vw;
+}
+
+.imageB {
+  width: 40vw;
+}

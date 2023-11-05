@@ -1,0 +1,103 @@
+.root {
+  margin: 42px;
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+
+  .card {
+    box-shadow: 0px 6px 9px -1px rgba(0, 0, 0, 0.36);
+    margin: 0 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    width: 18%;
+    max-width: 320px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    .cardIcon {
+      margin: 10px 0 0 0;
+      svg {
+      }
+    }
+    .cardTitle {
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .cardDesc {
+      font-size: 18px;
+      text-align: center;
+      margin: 0 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .root {
+    flex-direction: column;
+    .card {
+      flex-direction: row;
+      justify-content: space-between !important;
+      align-items: center;
+      margin-bottom: 40px;
+      height: 100%;
+      padding: 10px 0;
+      .cardIcon {
+        margin: 0 30px !important;
+      }
+      .cardTitle {
+        margin-right: 10px;
+        white-space: normal !important;
+        font-weight: 900;
+        &::after {
+          display: none !important;
+        }
+      }
+    }
+    .cardDesc {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 1180px) {
+  .root {
+    flex-direction: column;
+    .card {
+      flex-direction: row;
+      justify-content: left;
+      width: 100% !important;
+      max-width: 100vw !important;
+      align-items: center;
+      margin-bottom: 40px;
+      height: 100%;
+      padding: 10px 0;
+      .cardIcon {
+        margin: 0 50px;
+      }
+      .cardTitle {
+        position: relative;
+        &::after {
+          right: -10%;
+          top: 0;
+          position: absolute;
+          display: block;
+          content: '';
+          width: 2px;
+          background-color: #272727;
+          height: 90%;
+        }
+        white-space: nowrap;
+        position: relative;
+        font-size: calc(24px + 10 * ((100vw - 320px) / (1280 - 320)));
+        font-weight: 900;
+      }
+      .cardDesc {
+        width: 100%;
+        text-align: END;
+        font-size: 20px;
+      }
+    }
+  }
+}

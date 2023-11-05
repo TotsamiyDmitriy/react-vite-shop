@@ -1,0 +1,35 @@
+.main {
+  margin-top: 124px;
+  .container {
+    max-width: 1820px;
+    width: 100%;
+    margin: 0 auto;
+    .settings {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row;
+      font-size: 24px;
+      font-weight: 900;
+
+      align-items: center;
+      margin: 38px 50px;
+      .filters {
+        border-radius: 15px;
+        padding: 10px 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin-right: 30px;
+        color: #848484;
+        transition: all 0.3s;
+        &:hover {
+          transition: all 0.3s;
+          background-color: #f0f0f0;
+        }
+        .svg {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}

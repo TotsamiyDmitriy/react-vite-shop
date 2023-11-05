@@ -1,0 +1,24 @@
+.catalog_list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 5fr;
+  justify-content: center;
+  justify-items: center;
+  column-gap: 60px;
+  &.active {
+    grid-template-columns: 1fr 4fr;
+  }
+  .catalog_list__wrapper {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, 410px);
+    justify-content: center;
+    justify-items: center;
+    column-gap: 60px;
+    row-gap: 60px;
+
+    .catalog_list__card {
+      display: block;
+    }
+  }
+}

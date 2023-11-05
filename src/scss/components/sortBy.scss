@@ -1,0 +1,57 @@
+.main {
+  position: relative;
+  padding: 10px 10px 10px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+  &:hover {
+    border-radius: 15px;
+    transition: all 0.3s;
+    background-color: #f0f0f0;
+  }
+  &.active {
+    transition: all 0.6s;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+    .svg {
+      transition: all 0.3s;
+      transform: rotate(180deg);
+    }
+  }
+  .svg {
+    transition: all 0.3s;
+    margin-left: 10px;
+  }
+  .sorting_block {
+    transition: all 0.3s;
+    opacity: 0;
+    position: absolute;
+    border-radius: 10px 0 10px 10px;
+    background-color: #fff;
+    width: 355px;
+    overflow: hidden;
+    height: 0;
+    right: 0;
+    top: 48px;
+    &.active {
+      opacity: 1;
+      height: 228px;
+      transition: all 0.3s;
+      display: block;
+    }
+    ul {
+      margin-left: 28px;
+      list-style: none;
+      li {
+        padding: 15px 0;
+        font-weight: 400;
+        font-size: 18px;
+        white-space: nowrap;
+        &.active {
+          font-weight: 900;
+        }
+      }
+    }
+  }
+}

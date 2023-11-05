@@ -1,0 +1,12 @@
+.swiper-pagination {
+  position: relative !important;
+}
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+  bottom: 0 !important;
+}
+:root {
+  --swiper-theme-color: #002482;
+}

@@ -1,0 +1,41 @@
+.rating {
+  display: flex;
+  align-items: center;
+  .ratingBody {
+    position: relative;
+    &::before {
+      content: '★★★★★';
+      display: block;
+      opacity: 0.5;
+    }
+    .ratingActive {
+      position: absolute;
+      width: 80%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      &::before {
+        content: '★★★★★';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+    }
+    .ratingItems {
+      display: flex;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      .ratingItem {
+        flex: 0 0 20%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+.main {
+  max-width: 1900px;
+  padding: 0 40px;
+  margin: auto;
+  margin-bottom: 80px;
+  .title {
+    margin-bottom: 30px;
+    color: #272727;
+    font-size: 36px;
+    font-weight: 900;
+  }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) repeat(2, 0.5fr);
+    grid-template-rows: repeat(2, 330px);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-areas:
+      'wide1 wide2 wide4 wide4'
+      'wide1 wide3 wide5 wide6';
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .main {
+    max-width: auto !important;
+    .container {
+      width: 100% !important;
+      display: flex !important;
+      justify-content: flex-start !important;
+      flex-direction: column;
+    }
+  }
+}

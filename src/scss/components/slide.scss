@@ -1,0 +1,101 @@
+.slide {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  height: 828px;
+  .container {
+    position: relative;
+    .containerText {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      svg {
+        margin-bottom: 44px;
+        width: 78%;
+      }
+      span {
+        white-space: nowrap;
+        font-size: calc(36px + 10 * ((100vw - 320px) / (1280 - 320)));
+        font-weight: 700;
+        margin-top: 22px;
+        color: #565656;
+      }
+      .button {
+        margin-top: 34px;
+        transition: all 400ms;
+        &:hover {
+          transition: all 400ms;
+          background-color: #272727;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+
+.image1,
+.image2 {
+  object-fit: cover;
+  object-position: right;
+  max-width: 100%;
+  height: 828px;
+}
+
+.image1 {
+  width: 60vw;
+}
+
+.image2 {
+  width: 40vw;
+}
+
+.inverse {
+  color: #ffffff !important;
+  border-color: #ffffff;
+}
+
+.banner {
+  width: 100vw !important;
+  margin-bottom: 80px;
+  object-position: center;
+}
+
+@media screen and (max-width: 1441px) {
+  .image1 {
+    width: 35vw;
+    object-position: center;
+  }
+  .image2 {
+    width: 65vw;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .image1 {
+    width: 0vw;
+    object-position: center;
+  }
+  .image2 {
+    width: 100vw;
+    .containerText {
+      svg {
+        width: 10%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .containerText svg {
+    width: 60%;
+  }
+  .containerText span {
+    font-size: 26px !important;
+  }
+}
