@@ -34,7 +34,7 @@ export const productSlice = createSlice({
 export function fetchSingleProduct(index: string | undefined) {
 	return async function (dispatch:AppDispatch) {
 		dispatch(setLoaded(false))
-	  await axios.get(`http://localhost:3004/products?id=${index}`).then(({data}) => {
+	  await axios.get(`https://json-server-react-shop.vercel.app/products?id=${index}`).then(({data}) => {
 		dispatch(setSingleProduct(data)) 
 		dispatch(setLoaded(true))     
 	  })

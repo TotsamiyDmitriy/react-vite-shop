@@ -157,7 +157,7 @@ export function fetchProducts(settings:SettingsType, setFunction:any) {
   const allFiltersQuery = filterQuery.join('&')
 
   return async function (dispatch:AppDispatch) {
-    await axios.get(`http://localhost:3004/products?${`_page=${page}&_limit=12&`}${search ? `name_like=${search}&`: ''}${category ? `category=${category}&`: ''}${sortBy}&${allFiltersQuery}`).then(({data}) => {
+    await axios.get(`https://json-server-react-shop.vercel.app/products?${`_page=${page}&_limit=12&`}${search ? `name_like=${search}&`: ''}${category ? `category=${category}&`: ''}${sortBy}&${allFiltersQuery}`).then(({data}) => {
       dispatch(setFunction(data))
           
     })
@@ -168,7 +168,7 @@ export function fetchUniqueProducts(settings:SettingsType) {
 
   const {category} = settings
     return async function (dispatch:AppDispatch) {
-    await axios.get(`http://localhost:3004/products?${category ? `category=${category}&`: ''}`).then(({data}) => {
+    await axios.get(`https://json-server-react-shop.vercel.app/products?${category ? `category=${category}&`: ''}`).then(({data}) => {
       dispatch(setUnique(data))     
       dispatch(setPageCount(data))  
     })
@@ -181,7 +181,7 @@ export function fetchSearchProducts(settings:SettingsType) {
 
   const {searchAll} = settings
   return async function (dispatch:AppDispatch) {
-    await axios.get(`http://localhost:3004/products?${searchAll ? `name_like=${searchAll}&`: ''}`).then(({data}) => {
+    await axios.get(`https://json-server-react-shop.vercel.app/products?${searchAll ? `name_like=${searchAll}&`: ''}`).then(({data}) => {
       dispatch(setSearchProducts(data))       
     })
      
