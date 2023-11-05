@@ -10,7 +10,7 @@ const pp: Array<Array<string>> = [
   ['More links', 'Blogs', 'Gift center', 'Buying guides', 'New arrivals', 'Clearance'],
 ];
 
-const Footer: React.FC = (props) => {
+const Footer: React.FC = () => {
   return (
     <div className={styles.root}>
       <div className={styles.logo}>

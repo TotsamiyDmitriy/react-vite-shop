@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import Button from './Button';
 import { setPriceRangeFilter } from '../redux/catalogSlice';
 
-const PriceRange: React.FC<IPriceRange> = (props) => {
+const PriceRange: React.FC<IPriceRange> = () => {
   const { priceRangeProducts, PriceRangeFilter, products } = useAppSelector(
     ({ catalogReducer }) => ({
       priceRangeProducts: catalogReducer.priceRangeProducts,

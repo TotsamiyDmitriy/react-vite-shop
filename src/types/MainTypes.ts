@@ -1,4 +1,3 @@
-import { Product } from "../pages";
 
 export type ProductType = {
   id: number;
