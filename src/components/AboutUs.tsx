@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../scss/components/aboutUs.module.scss';
 import Button from './Button';
 
-const AboutUs: React.FC = (props) => {
+const AboutUs: React.FC = () => {
   return (
     <div className={styles.root}>
       <h2 className={styles.aboutUs}>About Us</h2>

@@ -27,7 +27,7 @@ const Catalog: React.FC = () => {
     }
   };
 
-  const paginateHandler = (event: React.ChangeEvent<unknown>, page: number) => {
+  const paginateHandler = (_event: React.ChangeEvent<unknown>, page: number) => {
     dispatch(setPage(page));
   };
 
