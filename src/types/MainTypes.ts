@@ -77,3 +77,9 @@ export type  CartProductType = {
   color: string;
   
 }
+
+export enum StatusTypes {
+  PENDING = 'pending',
+	FULFILLED = 'fulfilled',
+	REJECTED = 'rejected',
+}

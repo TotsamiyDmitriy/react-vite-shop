@@ -40,6 +40,7 @@ const Catalog: React.FC = () => {
     sortBy: catalogReducer.sortBy,
     page: catalogReducer.page,
     pageCount: catalogReducer.pageCount,
+    status: catalogReducer.status,
   }));
 
   const { id } = useParams();
@@ -72,9 +73,11 @@ const Catalog: React.FC = () => {
         <CatalogList
           products={state.products}
           references={[RefListSet, RefSettings]}
-          uniqueProducts={state.uniqueProducts}></CatalogList>
+          uniqueProducts={state.uniqueProducts}
+          status={state.status}></CatalogList>
       </div>
       <Pagination
+        className={styles.pagination}
         count={state.pageCount}
         page={state.page}
         onChange={paginateHandler}

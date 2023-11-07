@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 import type { AppDispatch } from './store'
-import type { ProductType, SettingsType,ObjectArraySlice } from '../types/MainTypes'
+import { ProductType, SettingsType,ObjectArraySlice, StatusTypes } from '../types/MainTypes'
 
 import { filterWrapper, filterRangeValues, filterPriceRange } from '../utils/filters'
 
@@ -29,6 +29,7 @@ export interface  ICatalog {
 
   pageCount: number
   page: number,
+  status: StatusTypes,
 
 }
 
@@ -58,7 +59,27 @@ const initialState: ICatalog = {
   searchAllQuery: '',
   page:1,
   pageCount: 1,
+  status: StatusTypes.PENDING,
 }
+
+
+export const fetchProducts = createAsyncThunk<ProductType[], SettingsType>( 
+  'products/fetchProducts',
+  async (settings) => {
+
+  const {sortBy, allFilters, category, search, page} = settings
+  let filterQuery:string[] = []
+  for (let key in allFilters) {
+    if (allFilters[key].length !== 0) {
+    filterQuery.push(allFilters[key].map((filter:any) => {return(`${key}=${filter}`)}).join('&'))
+      
+    }
+  } 
+  const allFiltersQuery = filterQuery.join('&')
+  const {data} = await axios.get(`https://json-server-react-shop.vercel.app/products?${`_page=${page}&_limit=12&`}${search ? `name_like=${search}&`: ''}${category ? `category=${category}&`: ''}${sortBy}&${allFiltersQuery}`)
+    return data 
+  }
+)
 
 
 export const catalogSlice = createSlice({
@@ -136,34 +157,26 @@ export const catalogSlice = createSlice({
       },
       setPageCount: (state, action: PayloadAction<ProductType[]>) => {
        state.pageCount = Math.ceil(action.payload.length / 12)
-       console.log(state.pageCount)
       }
-    }
-  }
-)
+    },
+    extraReducers : (builder) => {
+      builder.addCase(fetchProducts.pending, (state) => {
+        state.status = StatusTypes.PENDING;
+        state.products = [];
+      });
+  
+      builder.addCase(fetchProducts.fulfilled, (state, action) => {
+        state.status = StatusTypes.FULFILLED;
+        state.products = action.payload;
+      });
+  
+      builder.addCase(fetchProducts.rejected, (state) => {
+        state.status = StatusTypes.REJECTED;
+        state.products = [];
+      });
+    },
+  })
 
-
-
-export function fetchProducts(settings:SettingsType, setFunction:any) {
-
-  const {sortBy, allFilters, category, search, page} = settings
-  let filterQuery:string[] = []
-  for (let key in allFilters) {
-    if (allFilters[key].length !== 0) {
-    filterQuery.push(allFilters[key].map((filter:any) => {return(`${key}=${filter}`)}).join('&'))
-      
-    }
-  } 
-  const allFiltersQuery = filterQuery.join('&')
-
-  return async function (dispatch:AppDispatch) {
-    await axios.get(`https://json-server-react-shop.vercel.app/products?${`_page=${page}&_limit=12&`}${search ? `name_like=${search}&`: ''}${category ? `category=${category}&`: ''}${sortBy}&${allFiltersQuery}`).then(({data}) => {
-      dispatch(setFunction(data))
-          
-    })
-     
-  }
-}
 export function fetchUniqueProducts(settings:SettingsType) {
 
   const {category} = settings
@@ -171,6 +184,15 @@ export function fetchUniqueProducts(settings:SettingsType) {
     await axios.get(`https://json-server-react-shop.vercel.app/products?${category ? `category=${category}&`: ''}`).then(({data}) => {
       dispatch(setUnique(data))     
       dispatch(setPageCount(data))  
+    })
+     
+  }
+}
+
+export function fetchCurrentProducts() {
+    return async function (dispatch:AppDispatch) {
+    await axios.get(`https://json-server-react-shop.vercel.app/products`).then(({data}) => {
+      dispatch(setCurrentProducts(data))
     })
      
   }

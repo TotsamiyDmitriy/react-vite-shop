@@ -8,9 +8,8 @@ import { AppDispatch } from './redux/store';
 import { Footer, Header } from './components';
 import {
   fetchProducts,
-  setProducts,
   fetchSearchProducts,
-  setCurrentProducts,
+  fetchCurrentProducts,
   fetchUniqueProducts,
 } from './redux/catalogSlice';
 import { ProductType, FilterType, ArrayFilterType, CartProductType } from './types/MainTypes';
@@ -55,7 +54,7 @@ const App: React.FC = () => {
   const isMounted = React.useRef(false);
 
   useEffect(() => {
-    dispatch(fetchProducts(state, setProducts));
+    dispatch(fetchProducts(state));
   }, [
     dispatch,
     state.allFilters,
@@ -71,7 +70,7 @@ const App: React.FC = () => {
   }, [state.category]);
 
   useEffect(() => {
-    dispatch(fetchProducts(state, setCurrentProducts));
+    dispatch(fetchCurrentProducts());
   }, []);
 
   useEffect(() => {
