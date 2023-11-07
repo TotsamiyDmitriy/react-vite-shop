@@ -57,7 +57,7 @@ const TradeSlider: React.FC<PropsType> = ({ title }) => {
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
 
-  const settings: object = {
+  const settings = {
     modules: [Navigation, Pagination, Scrollbar, A11y, EffectCoverflow],
     slidesPerView: 1.9,
     spaceBetween: 20,

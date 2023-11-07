@@ -24,7 +24,7 @@ const Slide = (props: slideProps) => {
           {props.title}
           <span className={inverseLogic}>Big Fashion Festival</span>
           <span className={inverseLogic}>50% - 80% off</span>
-          <Button className={`button ${inverseLogic}`} blank>
+          <Button className={`button ${inverseLogic}`} navigation="catalog/" blank>
             {props.titleButton}
           </Button>
         </div>
