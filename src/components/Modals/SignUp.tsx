@@ -2,9 +2,9 @@ import { Box } from '@mui/material';
 import React, { FormEventHandler, useState } from 'react';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import styles from '../../scss/components/modals/signUp.module.scss';
-import { authUser, setTypeModal, setOpenModal } from '../../redux/authSlice';
+import { setTypeModal, setOpenModal } from '../../redux/authSlice';
 import { useAppDispatch } from '../../redux/hooks';
-import { userType } from '../../types/MainTypes';
+
 interface ISignUp {}
 
 const style = {
@@ -31,7 +31,7 @@ const SignUp: React.FC<ISignUp> = React.forwardRef<React.Ref<HTMLDivElement>, IS
     const signUpHandler: FormEventHandler<HTMLFormElement> = (e) => {
       e.preventDefault();
       createUserWithEmailAndPassword(auth, email, pass)
-        .then((user) => {
+        .then(() => {
           setEmail('');
           setPass('');
           catchedError('');

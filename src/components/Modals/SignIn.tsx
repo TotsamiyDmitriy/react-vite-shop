@@ -2,9 +2,8 @@ import { Box } from '@mui/material';
 import React, { FormEventHandler, useState } from 'react';
 import styles from '../../scss/components/modals/signIn.module.scss';
 import { useAppDispatch } from '../../redux/hooks';
-import { authUser, setOpenModal, setTypeModal } from '../../redux/authSlice';
+import { setOpenModal, setTypeModal } from '../../redux/authSlice';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { userType } from '../../types/MainTypes';
 
 interface ISignIn {}
 
