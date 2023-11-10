@@ -63,12 +63,13 @@ const initialState: ICatalog = {
 }
 
 
+
+
 export const fetchProducts = createAsyncThunk<ProductType[], SettingsType>( 
   'products/fetchProducts',
   async (settings) => {
 
   const {sortBy, allFilters, category, search, page} = settings
-  console.log(settings)
   let filterQuery:string[] = []
   for (let key in allFilters) {
     if (allFilters[key].length !== 0) {
@@ -98,17 +99,8 @@ export const catalogSlice = createSlice({
   initialState,
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
-     setProducts: (state, action: PayloadAction<ProductType[]>) => {
-      state.products = filterPriceRange(filterWrapper(filterWrapper(action.payload, state.allArrayFilters['sizes'], 'sizes'), state.allArrayFilters['colors'], 'colors'), state.priceRangeFilter)
-      if (state.priceRangeFilter.length === 0) {
-      state.priceRangeProducts = filterRangeValues(state.products);   
-      }
-    },
     setUnique : (state, action: PayloadAction<ProductType[]>) => {
       state.uniqueProducts = action.payload
-    },
-    setCurrentProducts : (state, action: PayloadAction<ProductType[]>) => {
-      state.currentProducts = action.payload
     },
     setSearchProducts : (state, action: PayloadAction<ProductType[]>) => {
       state.searchProducts = action.payload
@@ -169,6 +161,10 @@ export const catalogSlice = createSlice({
        state.pageCount = Math.ceil(action.payload.length / 12)
       }
     },
+
+    
+
+
     extraReducers : (builder) => {
       builder.addCase(fetchProducts.pending, (state) => {
         state.status = StatusTypes.PENDING;
@@ -230,6 +226,6 @@ export function fetchSearchProducts(settings:SettingsType) {
 
 
 
-export const {setPageCount,setPage,setSearchProducts,setSearch,setSearchAll,setCurrentProducts, setCategory, reloadFilters, setProducts, switchFilters,clearAllFilters,setSortBy, setUnique,switchArrayFilters,setPriceRangeProducts, setPriceRangeFilter } = catalogSlice.actions
+export const {setPageCount,setPage,setSearchProducts,setSearch,setSearchAll, setCategory, reloadFilters, switchFilters,clearAllFilters,setSortBy, setUnique,switchArrayFilters,setPriceRangeProducts, setPriceRangeFilter } = catalogSlice.actions
 
 export default catalogSlice.reducer

@@ -10,7 +10,11 @@ const HandlerBurger = () => {
   burger?.classList.toggle('active');
 };
 
-const Header: React.FC = () => {
+interface IHeader {
+  handlerModal: () => void;
+}
+
+const Header: React.FC<IHeader> = ({ handlerModal }) => {
   return (
     <div className="header">
       <div className="container">
@@ -35,7 +39,7 @@ const Header: React.FC = () => {
           </div>
           <ul className="categories" id="burger">
             <Search className="mobile_search"></Search>
-            <Profile className="mobile_profile"></Profile>
+            <Profile handlerModal={handlerModal} className="mobile_profile"></Profile>
             {categories.map((el: String, id: Number): React.ReactNode => {
               return (
                 <NavLink className="link" key={`${el}__${id}`} to={`/catalog/${id}`}>
@@ -52,8 +56,8 @@ const Header: React.FC = () => {
           </ul>
         </nav>
         <div className="account">
-          <Search className=""></Search>
-          <Profile className="profile"></Profile>
+          <Search className="search"></Search>
+          <Profile handlerModal={handlerModal} className="profile"></Profile>
         </div>
       </div>
     </div>

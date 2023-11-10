@@ -25,8 +25,13 @@ const CatalogList: React.FC<ICatalogList> = ({ products, uniqueProducts, referen
         {status === 'pending'
           ? Array(12)
               .fill(null)
-              .map(() => (
-                <Skeleton variant="rounded" width={410} height={404} animation="wave"></Skeleton>
+              .map((_, id: number) => (
+                <Skeleton
+                  key={`${status}__${id}`}
+                  variant="rounded"
+                  width={410}
+                  height={404}
+                  animation="wave"></Skeleton>
               ))
           : products.length !== 0
           ? products.map((obj: ProductType, index: number) => {

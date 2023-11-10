@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { catalogReducer, productReducer, cartReducer } from './'
+import { catalogReducer, productReducer, cartReducer,authReducer} from './'
 
 
 
@@ -9,7 +9,8 @@ export const store = configureStore({
   reducer: {
     catalogReducer,
     productReducer,
-    cartReducer
+    cartReducer,
+    authReducer
   },
   devTools: true
 })

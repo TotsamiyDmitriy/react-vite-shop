@@ -6,7 +6,7 @@ import { Scroller } from '../components/';
 import '../scss/pages/product.scss';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { fetchSingleProduct } from '../redux/productSlice';
-import Rating from '@mui/material/Rating';
+import { Rating, LinearProgress } from '@mui/material/';
 import { addItems } from '../redux/cartSlice';
 import { useSnackbar } from 'notistack';
 
@@ -50,7 +50,7 @@ const Product: React.FC<IProduct> = () => {
   );
 
   if (!state.isLoaded) {
-    return <div className="">Loading...</div>;
+    return <LinearProgress />;
   } else if (state.singleProduct === null || state.singleProduct.length === 0) {
     return <div>Soorryyy</div>;
   } else if (id !== undefined) {
@@ -82,8 +82,9 @@ const Product: React.FC<IProduct> = () => {
             <div className="product_images__selectImage">
               {singleProduct.photos.map((url: string, index: number) => {
                 return (
-                  <div className="product_images__selectImage_item">
+                  <div key={`${url}__${index}`} className="product_images__selectImage_item">
                     <img
+                      key={`${url}__${index}`}
                       src={url}
                       alt="none"
                       className="product_images__selectImage_item_image"

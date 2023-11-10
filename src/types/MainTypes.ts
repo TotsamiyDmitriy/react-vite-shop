@@ -83,3 +83,10 @@ export enum StatusTypes {
 	FULFILLED = 'fulfilled',
 	REJECTED = 'rejected',
 }
+
+export type userType = {
+  email : string | null
+  id : string | null
+  token : string | null
+
+}
