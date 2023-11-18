@@ -29,7 +29,20 @@
         .svg {
           margin-left: 15px;
         }
+        &.active {
+          transition: all 0.3s;
+          color: #272727;
+          .svg {
+            transition: all 0.3s;
+            fill: #272727;
+          }
+        }
       }
+    }
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
     }
   }
   .pagination {

@@ -1,7 +1,6 @@
 import React, { LegacyRef } from 'react';
 import MiniCard from './Scroller/MiniCard';
 import '../scss/pages/Catalog/catalogList.scss';
-import CatalogSettings from './CatalogSettings';
 import type { ProductType, StatusTypes } from '../types/MainTypes';
 import { Skeleton } from '@mui/material';
 
@@ -16,11 +15,9 @@ function noneFunction() {
   return <div className="catalog_list__empty">Sorry, there are no products with such filters</div>;
 }
 
-const CatalogList: React.FC<ICatalogList> = ({ products, uniqueProducts, references, status }) => {
+const CatalogList: React.FC<ICatalogList> = ({ products, references, status }) => {
   return (
     <div className="catalog_list" ref={references[0]}>
-      <CatalogSettings uniqueProducts={uniqueProducts} reference={references[1]}></CatalogSettings>
-
       <div className="catalog_list__wrapper">
         {status === 'pending'
           ? Array(12)
