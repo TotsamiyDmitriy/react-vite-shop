@@ -1,7 +1,9 @@
 import React from 'react';
 import '../../scss/components/header.scss';
 import { Search, Profile } from './';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { reloadFilters } from '../../redux/catalogSlice';
 
 const categories: Array<String> = ['Men', 'Women', 'Kids'];
 
@@ -15,6 +17,23 @@ interface IHeader {
 }
 
 const Header: React.FC<IHeader> = ({ handlerModal }) => {
+  const [_searchParams, setSearchParams] = useSearchParams();
+  const { category, allFilters, searchAllQuery } = useAppSelector(
+    ({ catalogReducer }) => catalogReducer,
+  );
+  const dispatch = useAppDispatch();
+  React.useEffect(() => {
+    dispatch(reloadFilters());
+  }, [category]);
+
+  React.useEffect(() => {
+    const queryVal = {
+      ...allFilters,
+    };
+    console.log(allFilters, queryVal);
+    setSearchParams(queryVal);
+  }, [category, allFilters, searchAllQuery]);
+
   return (
     <div className="header">
       <div className="container">

@@ -13,7 +13,7 @@ import {
   fetchUniqueProducts,
 } from './redux/catalogSlice';
 import { authUser, setOpenModal, setTypeModal } from './redux/authSlice';
-import { ProductType, FilterType, ArrayFilterType, CartProductType } from './types/MainTypes';
+import { ProductType, FilterType, CartProductType } from './types/MainTypes';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import Product from './pages/Product';
 import { Modal, Fade } from '@mui/material';
@@ -26,7 +26,6 @@ interface StateI {
   uniqueProducts: ProductType[];
   sortBy: string;
   allFilters: FilterType;
-  allArrayFilters: ArrayFilterType;
   priceRangeProducts: number[];
   priceRangeFilter: number[];
   cart: CartProductType[];
@@ -41,13 +40,11 @@ interface StateI {
 
 const App: React.FC = () => {
   const dispatch: AppDispatch = useAppDispatch();
-
   const state = useAppSelector<StateI>(({ catalogReducer, cartReducer, authReducer }) => ({
     products: catalogReducer.products,
     uniqueProducts: catalogReducer.uniqueProducts,
     sortBy: catalogReducer.sortBy,
     allFilters: catalogReducer.allFilters,
-    allArrayFilters: catalogReducer.allArrayFilters,
     category: catalogReducer.category,
     priceRangeProducts: catalogReducer.priceRangeProducts,
     priceRangeFilter: catalogReducer.priceRangeFilter,
@@ -60,15 +57,12 @@ const App: React.FC = () => {
 
     cart: cartReducer.items,
   }));
-
   const isMounted = React.useRef(false);
-
   useEffect(() => {
     dispatch(fetchProducts(state));
   }, [
     dispatch,
     state.allFilters,
-    state.allArrayFilters,
     state.sortBy,
     state.priceRangeFilter,
     state.category,

@@ -19,25 +19,6 @@ const CatalogSettings: React.FC<IFilter> = ({ uniqueProducts, reference }) => {
 
   function clearAllHandler() {
     dispatch(clearAllFilters());
-    const nodes = Array.from(
-      document.querySelectorAll(`#brandName div input`) as NodeListOf<HTMLInputElement>,
-    )
-      .concat(
-        Array.from(document.querySelectorAll(`#offers div input`) as NodeListOf<HTMLInputElement>),
-      )
-      .concat(
-        Array.from(
-          document.querySelectorAll(`#sizes div input`) as NodeListOf<HTMLInputElement>,
-        ).concat(
-          Array.from(
-            document.querySelectorAll(`#colors div input`) as NodeListOf<HTMLInputElement>,
-          ),
-        ),
-      );
-
-    nodes.forEach((element: HTMLInputElement) => {
-      element.checked = false;
-    });
   }
   return (
     <div className="filter" ref={reference}>

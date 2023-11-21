@@ -1,5 +1,6 @@
 
 export type ProductType = {
+  [x:string]: any | undefined
   id: number;
 	name: string;
   brandName: string;
@@ -49,17 +50,14 @@ export type FilterType = {
   offers: string[],
 }
 
-export type ArrayFilterType = {
-  colors: string[],
-  sizes: string[]
-}
-
 
 export type ObjectArraySlice = {
   [key: string]: any[],
-  brandName: any[]
+  brandName: any[],
   colors: string[],
   offers: string[],
+  sizes: string[],
+  
 }
 
 export type  CartProductType = {

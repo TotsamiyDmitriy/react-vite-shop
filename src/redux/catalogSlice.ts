@@ -19,7 +19,6 @@ export interface  ICatalog {
   allFilters: ObjectArraySlice,
   sortBy : string,
   category? : string,
-  allArrayFilters: any,
   priceRangeProducts: number[],
   priceRangeFilter: number[],
   checked: boolean[],
@@ -46,14 +45,11 @@ const initialState: ICatalog = {
   isLoaded: false,
   allFilters:{
     brandName:[],
-    colors: [],
     offers: [],
-  },
-  sortBy: '_sort=rating&_order=desc',
-  allArrayFilters: {
     colors: [],
     sizes: [],
   },
+  sortBy: '_sort=rating&_order=desc',
   checked: [],
   searchQuery:'',
   searchAllQuery: '',
@@ -71,10 +67,10 @@ export const fetchProducts = createAsyncThunk<ProductType[], SettingsType>(
 
   const {sortBy, allFilters, category, search, page} = settings
   let filterQuery:string[] = []
-  for (let key in allFilters) {
-    if (allFilters[key].length !== 0) {
-    filterQuery.push(allFilters[key].map((filter:any) => {return(`${key}=${filter}`)}).join('&'))
-      
+  const filtersKeys = Object.keys(allFilters)
+  for (let i = 0; i <= 1; i++) {
+    if (allFilters[`${filtersKeys[i]}`].length !== 0) {
+    filterQuery.push(allFilters[`${filtersKeys[i]}`].map((filter:any) => {return(`${filtersKeys[i]}=${filter}`)}).join('&'))
     }
   } 
   const allFiltersQuery = filterQuery.join('&')
@@ -109,20 +105,15 @@ export const catalogSlice = createSlice({
       state.sortBy = action.payload
     },
     switchFilters: (state, action: PayloadAction<string[]>) => {
-
+      const allFiltersByKey = state.allFilters[action.payload[1]]
         if(state.allFilters[action.payload[1]].length !== 0 && state.allFilters[action.payload[1]].includes(action.payload[0])) {
-          state.allFilters[action.payload[1]] = state.allFilters[action.payload[1]].filter((filter:string) => filter !== action.payload[0]);
+          
+          state.allFilters[action.payload[1]] = allFiltersByKey.filter((filter:string) => filter !== action.payload[0]);
         } else {
-          state.allFilters[action.payload[1]].push(action.payload[0])
+          state.allFilters[action.payload[1]] = [...allFiltersByKey,(action.payload[0])]
           }
         },
-    switchArrayFilters: (state, action: PayloadAction<string[]>) => {
-        if (state.allArrayFilters[action.payload[1]].length !== 0 && state.allArrayFilters[action.payload[1]].includes(action.payload[0])) {
-          state.allArrayFilters[action.payload[1]] = state.allArrayFilters[action.payload[1]].filter((ArrFilters:string) => ArrFilters !== action.payload[0])
-        } else {
-        state.allArrayFilters[action.payload[1]].push(action.payload[0])
-        }
-      },
+    
 
       setPriceRangeProducts: (state, action: PayloadAction<number[]>) => {
         state.priceRangeProducts = action.payload
@@ -132,13 +123,11 @@ export const catalogSlice = createSlice({
       },
 
       clearAllFilters:(state) => {
-        state.allArrayFilters = initialState.allArrayFilters
         state.allFilters = initialState.allFilters
         state.priceRangeFilter = initialState.priceRangeFilter
         
       },
       reloadFilters: (state) => {
-        state.allArrayFilters = initialState.allArrayFilters
         state.allFilters = initialState.allFilters
       },
       setLoaded:(state, action: PayloadAction<boolean>) => {
@@ -159,7 +148,13 @@ export const catalogSlice = createSlice({
       },
       setPageCount: (state, action: PayloadAction<ProductType[]>) => {
        state.pageCount = Math.ceil(action.payload.length / 12)
-      }
+      },
+      setFilters: (state, action:PayloadAction<any>) => {
+        state.allFilters.brandName = action.payload.brandName
+        state.allFilters.sizes = action.payload.sizes
+        state.allFilters.colors = action.payload.colors
+        state.allFilters.offers = action.payload.offers
+      }    
     },
 
     
@@ -173,7 +168,8 @@ export const catalogSlice = createSlice({
   
       builder.addCase(fetchProducts.fulfilled, (state, action) => {
         state.status = StatusTypes.FULFILLED;
-        state.products = filterPriceRange(filterWrapper(filterWrapper(action.payload, state.allArrayFilters['sizes'], 'sizes'), state.allArrayFilters['colors'], 'colors'), state.priceRangeFilter)
+        
+        state.products = filterPriceRange(filterWrapper(filterWrapper(action.payload, state.allFilters.sizes, 'sizes'), state.allFilters.colors, 'colors'), state.priceRangeFilter)
       if (state.priceRangeFilter.length === 0) {
       state.priceRangeProducts = filterRangeValues(state.products);   
       }
@@ -189,6 +185,7 @@ export const catalogSlice = createSlice({
       });
   
       builder.addCase(fetchCurrentProducts.fulfilled, (state, action) => {
+        
         state.status = StatusTypes.FULFILLED;
         state.currentProducts = action.payload;
       });
@@ -226,6 +223,6 @@ export function fetchSearchProducts(settings:SettingsType) {
 
 
 
-export const {setPageCount,setPage,setSearchProducts,setSearch,setSearchAll, setCategory, reloadFilters, switchFilters,clearAllFilters,setSortBy, setUnique,switchArrayFilters,setPriceRangeProducts, setPriceRangeFilter } = catalogSlice.actions
+export const {setFilters,setPageCount,setPage,setSearchProducts,setSearch,setSearchAll, setCategory, reloadFilters, switchFilters,clearAllFilters,setSortBy, setUnique,setPriceRangeProducts, setPriceRangeFilter } = catalogSlice.actions
 
 export default catalogSlice.reducer

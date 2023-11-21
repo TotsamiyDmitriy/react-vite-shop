@@ -2,7 +2,10 @@
 export interface PpProps {
 	image: string;
 	title: string;
-	settings: object;
+	settings: {
+		to:string,
+		filters : {}
+	};
   }
 
 

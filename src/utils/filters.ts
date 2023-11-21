@@ -30,7 +30,6 @@ export function UniqueColors(product:any, tmpArray:string[], keys:string) {
 export function filterWrapper(payload:ProductType[], colors:string[], keys:string) {
   return (payload.filter((product:any) => {
     const colorsKeys = Object.keys(product[keys])
-
         if(colors.length !== 0) {
           for (let i=0; i < colors.length; i++) {
             if (colorsKeys.includes(colors[i])) {
