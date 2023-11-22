@@ -5,7 +5,7 @@ import type { PpProps, ICategories } from '../../types/ICategories';
 import { useAppDispatch } from '../../redux/hooks';
 import { setFilters } from '../../redux/catalogSlice';
 
-const pp: Array<PpProps> = [
+const categories: Array<PpProps> = [
   {
     image: 'https://i.ibb.co/zZkddTD/1.png',
     title: 'Womens Pants',
@@ -25,9 +25,9 @@ const pp: Array<PpProps> = [
     settings: {
       to: 'catalog/0',
       filters: {
-        brandName: [],
+        brandName: ['Linkoln'],
         offers: [],
-        colors: [],
+        colors: ['red'],
         sizes: [],
       },
     },
@@ -38,9 +38,9 @@ const pp: Array<PpProps> = [
     settings: {
       to: 'catalog/1',
       filters: {
-        brandName: [],
+        brandName: ['Linkoln'],
         offers: [],
-        colors: [],
+        colors: ['red', 'green'],
         sizes: [],
       },
     },
@@ -51,10 +51,10 @@ const pp: Array<PpProps> = [
     settings: {
       to: 'catalog/',
       filters: {
-        brandName: [],
+        brandName: ['asasasasa'],
         offers: [],
-        colors: [],
-        sizes: [],
+        colors: ['red'],
+        sizes: ['M', 'S'],
       },
     },
   },
@@ -64,7 +64,7 @@ const pp: Array<PpProps> = [
     settings: {
       to: 'catalog/',
       filters: {
-        brandName: [],
+        brandName: ['Hell'],
         offers: [],
         colors: [],
         sizes: [],
@@ -74,7 +74,15 @@ const pp: Array<PpProps> = [
   {
     image: 'https://i.ibb.co/0GWCp7k/ffa16c9da021e7e229613eaccd3b55de.jpg',
     title: 'Mans Jackets',
-    settings: { to: 'catalog/0', filters: {} },
+    settings: {
+      to: 'catalog/0',
+      filters: {
+        brandName: ['Linkoln'],
+        offers: [],
+        colors: [],
+        sizes: [],
+      },
+    },
   },
 ];
 
@@ -89,11 +97,11 @@ const Categories: React.FC<ICategories> = (props) => {
     <div className={styles.main}>
       <h2 className={styles.title}>{props.title}</h2>
       <div className={styles.container}>
-        {pp.map((obj: PpProps, index: number) => (
+        {categories.map((obj: PpProps, index: number) => (
           <Category
             key={`${obj.title}__${index}`}
             className={`category${index}`}
-            {...pp[index]}
+            {...categories[index]}
             settings={obj.settings}
             dispatcher={Dispatcher}
           />

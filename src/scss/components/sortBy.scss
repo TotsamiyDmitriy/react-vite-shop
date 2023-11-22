@@ -1,4 +1,5 @@
 .main {
+  color: #848484;
   position: relative;
   padding: 10px 10px 10px 15px;
   cursor: pointer;
@@ -10,11 +11,16 @@
     transition: all 0.3s;
     background-color: #f0f0f0;
   }
+  .svg {
+    stroke: #848484;
+  }
   &.active {
+    color: #272727;
     transition: all 0.6s;
     background-color: #fff;
     border-radius: 10px 10px 0 0;
     .svg {
+      stroke: #272727;
       transition: all 0.3s;
       transform: rotate(180deg);
     }

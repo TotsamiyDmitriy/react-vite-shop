@@ -3,7 +3,7 @@ import { MiniCard, MegaCard } from '..';
 import { useAppSelector } from '../../redux/hooks';
 import styles from '../../scss/components/scroller.module.scss';
 import { ProductType } from '../../types/MainTypes';
-import { Skeleton } from '@mui/material';
+import { ProductLoader, OfferLoader } from '../Loader';
 
 interface ScrollerType {
   offerType: string;
@@ -26,17 +26,9 @@ const Scroller: React.FC<ScrollerType> = ({ offerType, title }) => {
               .map((_el, id: number) => (
                 <div className={styles.component} key={`${id}`}>
                   {offerType === 'product' ? (
-                    <Skeleton
-                      variant="rounded"
-                      width={410}
-                      height={404}
-                      animation="wave"></Skeleton>
+                    <ProductLoader />
                   ) : offerType === 'offer' ? (
-                    <Skeleton
-                      variant="rounded"
-                      width={489}
-                      height={567}
-                      animation="wave"></Skeleton>
+                    <OfferLoader />
                   ) : (
                     ''
                   )}

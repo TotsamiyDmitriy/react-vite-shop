@@ -1,11 +1,27 @@
 .filter__container {
   display: flex;
   flex-direction: column;
+  box-shadow: none !important;
+  &::before {
+    opacity: 1 !important;
+  }
   .filter__title {
-    display: block;
+    padding: 0 !important;
+    margin: 0 !important;
     font-size: 24px;
     font-weight: 900;
-    margin: 25px 0;
+    div {
+      display: flex;
+      justify-content: space-between;
+
+      .filter__title_svg {
+        transition: all 0.3s;
+        &.active {
+          transition: all 0.3s;
+          transform: rotate(180deg);
+        }
+      }
+    }
   }
 
   .filter_input__wrapper {

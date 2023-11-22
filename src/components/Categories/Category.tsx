@@ -1,6 +1,8 @@
 import React from 'react';
 import '../../scss/components/category.scss';
 import { NavLink } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/hooks';
+import { reloadFilters } from '../../redux/catalogSlice';
 
 interface ICategory {
   className: string;
@@ -14,11 +16,15 @@ interface ICategory {
 }
 
 const Category: React.FC<ICategory> = ({ className, image, title, settings, dispatcher }) => {
+  const dispatch = useAppDispatch();
   return (
     <NavLink
       to={settings.to}
       className={`${className}`}
-      onClick={() => dispatcher(settings.filters)}>
+      onClick={() => {
+        dispatch(reloadFilters());
+        dispatcher(settings.filters);
+      }}>
       <div className="card">
         <h3 className="title">
           {title}

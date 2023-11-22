@@ -7,7 +7,7 @@ type ppType = {
   description: string;
 };
 
-const pp = [
+const services = [
   {
     svg: (
       <svg
@@ -123,7 +123,7 @@ const pp = [
 const Services: React.FC = () => {
   return (
     <div className={styles.root}>
-      {pp.map((val: ppType, id: number) => {
+      {services.map((val: ppType, id: number) => {
         return (
           <div key={`div${val}__${id}`} className={styles.card}>
             <div key={`div1${val}__${id}`} className={styles.cardIcon}>

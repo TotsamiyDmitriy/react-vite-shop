@@ -125,10 +125,12 @@ export const catalogSlice = createSlice({
       clearAllFilters:(state) => {
         state.allFilters = initialState.allFilters
         state.priceRangeFilter = initialState.priceRangeFilter
+        console.log("CLEAR");
         
       },
       reloadFilters: (state) => {
         state.allFilters = initialState.allFilters
+        console.log("RELOAD")
       },
       setLoaded:(state, action: PayloadAction<boolean>) => {
         state.isLoaded = action.payload
@@ -154,6 +156,7 @@ export const catalogSlice = createSlice({
         state.allFilters.sizes = action.payload.sizes
         state.allFilters.colors = action.payload.colors
         state.allFilters.offers = action.payload.offers
+        console.log("SET FILTERS", action.payload);
       }    
     },
 

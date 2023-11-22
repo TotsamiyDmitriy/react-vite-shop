@@ -1,9 +1,7 @@
 import React from 'react';
 import '../../scss/components/header.scss';
 import { Search, Profile } from './';
-import { NavLink, useSearchParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { reloadFilters } from '../../redux/catalogSlice';
+import { NavLink } from 'react-router-dom';
 
 const categories: Array<String> = ['Men', 'Women', 'Kids'];
 
@@ -13,27 +11,12 @@ const HandlerBurger = () => {
 };
 
 interface IHeader {
-  handlerModal: () => void;
+  [key: string]: any;
+  HandlerModal: () => void;
+  HandlerReload: () => void;
 }
 
-const Header: React.FC<IHeader> = ({ handlerModal }) => {
-  const [_searchParams, setSearchParams] = useSearchParams();
-  const { category, allFilters, searchAllQuery } = useAppSelector(
-    ({ catalogReducer }) => catalogReducer,
-  );
-  const dispatch = useAppDispatch();
-  React.useEffect(() => {
-    dispatch(reloadFilters());
-  }, [category]);
-
-  React.useEffect(() => {
-    const queryVal = {
-      ...allFilters,
-    };
-    console.log(allFilters, queryVal);
-    setSearchParams(queryVal);
-  }, [category, allFilters, searchAllQuery]);
-
+const Header: React.FC<IHeader> = ({ HandlerModal, HandlerReload }) => {
   return (
     <div className="header">
       <div className="container">
@@ -58,25 +41,29 @@ const Header: React.FC<IHeader> = ({ handlerModal }) => {
           </div>
           <ul className="categories" id="burger">
             <Search className="mobile_search"></Search>
-            <Profile handlerModal={handlerModal} className="mobile_profile"></Profile>
+            <Profile handlerModal={HandlerModal} className="mobile_profile"></Profile>
             {categories.map((el: String, id: Number): React.ReactNode => {
               return (
-                <NavLink className="link" key={`${el}__${id}`} to={`/catalog/${id}`}>
+                <NavLink
+                  onClick={HandlerReload}
+                  className="link"
+                  key={`${el}__${id}`}
+                  to={`/catalog/${id}`}>
                   {el}
                 </NavLink>
               );
             })}
-            <NavLink to={`/catalog/`} className="link">
+            <NavLink onClick={HandlerReload} to={`/catalog/`} className="link">
               Shop
             </NavLink>
-            <NavLink to={`/about/`} className="link">
+            <NavLink onClick={HandlerReload} to={`/about/`} className="link">
               Contact us
             </NavLink>
           </ul>
         </nav>
         <div className="account">
           <Search className="search"></Search>
-          <Profile handlerModal={handlerModal} className="profile"></Profile>
+          <Profile handlerModal={HandlerModal} className="profile"></Profile>
         </div>
       </div>
     </div>

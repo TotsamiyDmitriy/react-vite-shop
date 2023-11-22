@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import './scss/pages/App.scss';
 import { Main, Catalog, Cart, Favorite } from './pages';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { AppDispatch } from './redux/store';
 import { Footer, Header } from './components';
@@ -11,6 +11,7 @@ import {
   fetchSearchProducts,
   fetchCurrentProducts,
   fetchUniqueProducts,
+  reloadFilters,
 } from './redux/catalogSlice';
 import { authUser, setOpenModal, setTypeModal } from './redux/authSlice';
 import { ProductType, FilterType, CartProductType } from './types/MainTypes';
@@ -117,33 +118,35 @@ const App: React.FC = () => {
     dispatch(setTypeModal(false));
   };
 
-  const handlerModal = () => {
+  const HandlerModal = () => {
     dispatch(setOpenModal(true));
+  };
+
+  const HandlerReload = () => {
+    dispatch(reloadFilters());
   };
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Modal open={state.openModal} onClose={handleClose}>
-          <Fade in={state.openModal}>
-            {state.typeModal === false ? <SignIn></SignIn> : <SignUp></SignUp>}
-          </Fade>
-        </Modal>
-        <Header handlerModal={handlerModal}></Header>
-        <Routes>
-          <Route index element={<Main></Main>} />
-          <Route path="/catalog/:id" element={<Catalog></Catalog>} />
-          <Route path="/catalog/" element={<Catalog></Catalog>} />
-          <Route
-            path={`/product/:id`}
-            element={<Product products={state.uniqueProducts}></Product>}
-          />
-          <Route path="/favourite" element={<Favorite />} />
-          <Route path="/product/*" element={<div>NO ROUTES</div>}></Route>
-          <Route path="/cart/" element={<Cart />} />
-        </Routes>
-        <Footer></Footer>
-      </BrowserRouter>
+      <Modal open={state.openModal} onClose={handleClose}>
+        <Fade in={state.openModal}>
+          {state.typeModal === false ? <SignIn></SignIn> : <SignUp></SignUp>}
+        </Fade>
+      </Modal>
+      <Header HandlerModal={HandlerModal} HandlerReload={HandlerReload}></Header>
+      <Routes>
+        <Route index element={<Main></Main>} />
+        <Route path="/catalog/:id" element={<Catalog></Catalog>} />
+        <Route path="/catalog/" element={<Catalog></Catalog>} />
+        <Route
+          path={`/product/:id`}
+          element={<Product products={state.uniqueProducts}></Product>}
+        />
+        <Route path="/favourite" element={<Favorite />} />
+        <Route path="/product/*" element={<div>NO ROUTES</div>}></Route>
+        <Route path="/cart/" element={<Cart />} />
+      </Routes>
+      <Footer></Footer>
     </div>
   );
 };

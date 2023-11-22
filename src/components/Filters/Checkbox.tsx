@@ -41,4 +41,4 @@ const Checkbox: React.FC<ICheckbox> = ({ item, keyItem, dispatch }) => {
   );
 };
 
-export default Checkbox;
+export default React.memo(Checkbox);

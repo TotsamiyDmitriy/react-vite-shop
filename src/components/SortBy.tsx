@@ -40,7 +40,6 @@ const SortBy: React.FC<SortI> = ({ sort }) => {
         xmlns="http://www.w3.org/2000/svg">
         <path
           d="M7.5 11.25L15 18.75L22.5 11.25"
-          stroke="#272727"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

@@ -2,7 +2,7 @@ import React, { LegacyRef } from 'react';
 import MiniCard from './Scroller/MiniCard';
 import '../scss/pages/Catalog/catalogList.scss';
 import type { ProductType, StatusTypes } from '../types/MainTypes';
-import { Skeleton } from '@mui/material';
+import { ProductLoader } from './Loader';
 
 interface ICatalogList {
   products: Array<ProductType>;
@@ -22,14 +22,7 @@ const CatalogList: React.FC<ICatalogList> = ({ products, references, status }) =
         {status === 'pending'
           ? Array(12)
               .fill(null)
-              .map((_, id: number) => (
-                <Skeleton
-                  key={`${status}__${id}`}
-                  variant="rounded"
-                  width={410}
-                  height={404}
-                  animation="wave"></Skeleton>
-              ))
+              .map((_, id: number) => <ProductLoader key={id} />)
           : products.length !== 0
           ? products.map((obj: ProductType, index: number) => {
               return (

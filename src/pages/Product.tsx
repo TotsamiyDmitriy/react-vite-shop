@@ -49,6 +49,10 @@ const Product: React.FC<IProduct> = () => {
     </>
   );
 
+  function imageHandler(id: number) {
+    setImageId(id);
+  }
+
   if (!state.isLoaded) {
     return <LinearProgress />;
   } else if (state.singleProduct === null || state.singleProduct.length === 0) {
@@ -82,13 +86,15 @@ const Product: React.FC<IProduct> = () => {
             <div className="product_images__selectImage">
               {singleProduct.photos.map((url: string, index: number) => {
                 return (
-                  <div key={`${url}__${index}`} className="product_images__selectImage_item">
+                  <div
+                    key={`${url}__${index}`}
+                    className="product_images__selectImage_item"
+                    onClick={() => imageHandler(index)}>
                     <img
                       key={`${url}__${index}`}
                       src={url}
                       alt="none"
                       className="product_images__selectImage_item_image"
-                      onClick={() => setImageId(index)}
                     />
                   </div>
                 );

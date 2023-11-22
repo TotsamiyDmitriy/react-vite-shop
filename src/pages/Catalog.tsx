@@ -3,7 +3,7 @@ import { CatalogList, CatalogSettings, SortBy } from '../components';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { setCategory, setPage, setSortBy } from '../redux/catalogSlice';
 import styles from '../scss/pages/Catalog/catalog.module.scss';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { Pagination } from '@mui/material';
 
 const Catalog: React.FC = () => {
@@ -42,9 +42,15 @@ const Catalog: React.FC = () => {
 
   const { id } = useParams();
 
+  const [_searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() => {
     dispatch(setCategory(id));
   }, [id]);
+
+  React.useEffect(() => {
+    setSearchParams(state.allFilters);
+  }, [id, state.allFilters]);
 
   return (
     <div className={styles.main}>

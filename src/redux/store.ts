@@ -11,8 +11,7 @@ export const store = configureStore({
     productReducer,
     cartReducer,
     authReducer
-  },
-  devTools: true
+  }
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
