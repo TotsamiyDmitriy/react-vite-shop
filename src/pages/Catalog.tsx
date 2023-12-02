@@ -53,7 +53,7 @@ const Catalog: React.FC = () => {
   }, [id, state.allFilters]);
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} id="root">
       <div className={styles.container}>
         <div className={styles.settings}>
           <div

@@ -7,11 +7,13 @@ import { PopupAccount } from '.';
 import stringAvatar from '../../utils/avatar';
 
 interface ProfileProps {
+  burgerState?: boolean;
+  onClickLink: () => void;
   className: string;
   handlerModal: () => void;
 }
 
-const Profile: React.FC<ProfileProps> = ({ className, handlerModal }) => {
+const Profile: React.FC<ProfileProps> = ({ className, handlerModal, onClickLink }) => {
   const { isAuth, email } = useAuth();
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
@@ -32,7 +34,7 @@ const Profile: React.FC<ProfileProps> = ({ className, handlerModal }) => {
   return (
     <div className={className}>
       {isAuth === true ? (
-        <NavLink to={'/favourite/'}>
+        <NavLink onClick={onClickLink} to={'/favourite/'}>
           <svg
             width="27"
             height="23"
@@ -60,7 +62,7 @@ const Profile: React.FC<ProfileProps> = ({ className, handlerModal }) => {
           </svg>
         </a>
       )}
-      <NavLink to={'/cart/'}>
+      <NavLink onClick={onClickLink} to={'/cart/'}>
         <svg
           width="25"
           height="19"

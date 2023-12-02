@@ -20,3 +20,23 @@
     }
   }
 }
+
+@media screen and (max-width: 920px) {
+  .catalog_list {
+    column-gap: 30px;
+    .catalog_list__wrapper {
+      grid-template-columns: repeat(auto-fill, 320px);
+      column-gap: 40px;
+      row-gap: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .catalog_list {
+    .catalog_list__wrapper {
+      column-gap: 20px;
+      row-gap: 20px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 .tabs {
   max-width: 1514px;
-  margin: 0 auto;
+  margin: 10px auto;
   .product_tabs {
     margin: 0 0 50px 0;
     &_nav {
@@ -8,6 +8,7 @@
         content: '';
         display: block;
         width: 100%;
+        margin-top: 10px;
         height: 1px;
         background-color: #848484;
       }
@@ -38,6 +39,7 @@
       }
     }
     &__body {
+      padding: 0 20px;
       &_block {
         display: none;
         &#tab_01 {
@@ -48,6 +50,11 @@
           }
         }
         &#tab_02 {
+          .title {
+            font-weight: 900;
+            font-size: clamp(1.125rem, 0.9375rem + 0.8333vw, 1.5rem);
+            margin: 27px 0 18px 0;
+          }
         }
         &#tab_03 {
           .title {

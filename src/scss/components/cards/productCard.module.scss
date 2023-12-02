@@ -64,14 +64,19 @@
     }
   }
 }
-@media screen and (max-width: 767px) {
-  .containerProduct {
-    width: 320px !important;
-  }
-  .imageProduct {
-    height: 220px !important;
-  }
-  .rating {
-    padding: 10px 20px 20px 20px !important;
+
+@media screen and (max-width: 920px) {
+  .wrapper {
+    .root {
+      .containerProduct {
+        width: 320px;
+        .imageProduct {
+          height: 220px;
+        }
+        .rating {
+          padding: 10px 20px 20px 20px;
+        }
+      }
+    }
   }
 }

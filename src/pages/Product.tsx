@@ -80,7 +80,7 @@ const Product: React.FC<IProduct> = () => {
     };
 
     return (
-      <>
+      <div id="root">
         <div className="product">
           <div className="product_images">
             <div className="product_images__selectImage">
@@ -209,7 +209,7 @@ const Product: React.FC<IProduct> = () => {
         <Tabs rewiews={singleProduct.reviews} allRating={singleProduct.rating}></Tabs>
         <Scroller offerType={'product'} title="Similar Products"></Scroller>
         <Scroller offerType={'product'} title="Customer Also Like"></Scroller>
-      </>
+      </div>
     );
   }
 };

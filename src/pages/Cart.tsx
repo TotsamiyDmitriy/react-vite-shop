@@ -12,7 +12,7 @@ const Cart: React.FC = () => {
   }));
 
   return state.cart.length !== 0 ? (
-    <div className={styles.main}>
+    <div className={styles.main} id="root">
       <span className={styles.title}>
         <h1>
           My <span>Cart</span>

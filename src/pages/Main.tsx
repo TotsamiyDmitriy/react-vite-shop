@@ -69,7 +69,7 @@ function Main() {
   ];
 
   return (
-    <div className="Main">
+    <div className="Main" id="root">
       <Slider></Slider>
       <Scroller offerType={'product'} title="Trending Now"></Scroller>
       <Scroller offerType={'offer'} title="Deals of the Day"></Scroller>

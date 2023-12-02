@@ -2,26 +2,43 @@ import React from 'react';
 import '../../scss/components/header.scss';
 import { Search, Profile } from './';
 import { NavLink } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/hooks';
+import { reloadFilters } from '../../redux/catalogSlice';
+import { setOpenModal } from '../../redux/authSlice';
 
-const categories: Array<String> = ['Men', 'Women', 'Kids'];
-
-const HandlerBurger = () => {
-  const burger = document.getElementById('burger');
-  burger?.classList.toggle('active');
-};
+const categories: String[] = ['Men', 'Women', 'Kids'];
 
 interface IHeader {
   [key: string]: any;
-  HandlerModal: () => void;
-  HandlerReload: () => void;
+  burgerState: boolean;
+  setBurgerState: (burgerState: boolean) => void;
 }
 
-const Header: React.FC<IHeader> = ({ HandlerModal, HandlerReload }) => {
+const Header: React.FC<IHeader> = ({ burgerState, setBurgerState }) => {
+  const dispatch = useAppDispatch();
+
+  const HandlerModal = () => {
+    dispatch(setOpenModal(true));
+  };
+
+  const HandlerReload = () => {
+    const body = document.body;
+    body?.classList.remove('disabled');
+    dispatch(reloadFilters());
+    setBurgerState(false);
+  };
+
+  const HandlerBurger = () => {
+    const body = document.body;
+    body?.classList.toggle('disabled');
+    setBurgerState(!burgerState);
+  };
+
   return (
     <div className="header">
       <div className="container">
         <nav className="header__navigation">
-          <NavLink className="logo" to={'/'}>
+          <NavLink onClick={HandlerReload} className="logo" to={'/'}>
             <svg
               width="57"
               height="48"
@@ -39,10 +56,13 @@ const Header: React.FC<IHeader> = ({ HandlerModal, HandlerReload }) => {
           <div className="header__burger" onClick={HandlerBurger}>
             <span></span>
           </div>
-          <ul className="categories" id="burger">
+          <ul className={`categories ${burgerState ? 'active' : ''}`}>
             <Search className="mobile_search"></Search>
-            <Profile handlerModal={HandlerModal} className="mobile_profile"></Profile>
-            {categories.map((el: String, id: Number): React.ReactNode => {
+            <Profile
+              onClickLink={HandlerReload}
+              handlerModal={HandlerModal}
+              className="mobile_profile"></Profile>
+            {categories.map((el: String, id) => {
               return (
                 <NavLink
                   onClick={HandlerReload}
@@ -63,7 +83,10 @@ const Header: React.FC<IHeader> = ({ HandlerModal, HandlerReload }) => {
         </nav>
         <div className="account">
           <Search className="search"></Search>
-          <Profile handlerModal={HandlerModal} className="profile"></Profile>
+          <Profile
+            onClickLink={HandlerReload}
+            handlerModal={HandlerModal}
+            className="profile"></Profile>
         </div>
       </div>
     </div>

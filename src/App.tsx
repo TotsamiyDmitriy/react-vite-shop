@@ -117,15 +117,7 @@ const App: React.FC = () => {
     dispatch(setOpenModal(false));
     dispatch(setTypeModal(false));
   };
-
-  const HandlerModal = () => {
-    dispatch(setOpenModal(true));
-  };
-
-  const HandlerReload = () => {
-    dispatch(reloadFilters());
-  };
-
+  const [burgerState, setBurgerState] = React.useState(false);
   return (
     <div className="App">
       <Modal open={state.openModal} onClose={handleClose}>
@@ -133,7 +125,7 @@ const App: React.FC = () => {
           {state.typeModal === false ? <SignIn></SignIn> : <SignUp></SignUp>}
         </Fade>
       </Modal>
-      <Header HandlerModal={HandlerModal} HandlerReload={HandlerReload}></Header>
+      <Header burgerState={burgerState} setBurgerState={setBurgerState}></Header>
       <Routes>
         <Route index element={<Main></Main>} />
         <Route path="/catalog/:id" element={<Catalog></Catalog>} />

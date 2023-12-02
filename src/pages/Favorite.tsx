@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 const Favorite: React.FC = () => {
   const { isAuth } = useAuth();
 
-  return <div>{!isAuth && <Navigate to={'/'}></Navigate>}</div>;
+  return <div id="root">{!isAuth && <Navigate to={'/'}></Navigate>}</div>;
 };
 
 export default Favorite;
