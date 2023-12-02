@@ -11,7 +11,6 @@ import {
   fetchSearchProducts,
   fetchCurrentProducts,
   fetchUniqueProducts,
-  reloadFilters,
 } from './redux/catalogSlice';
 import { authUser, setOpenModal, setTypeModal } from './redux/authSlice';
 import { ProductType, FilterType, CartProductType } from './types/MainTypes';
