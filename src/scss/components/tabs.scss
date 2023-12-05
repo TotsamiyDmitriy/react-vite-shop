@@ -2,7 +2,7 @@
   max-width: 1514px;
   margin: 10px auto;
   .product_tabs {
-    margin: 0 0 50px 0;
+    margin-bottom: 50px;
     &_nav {
       &::after {
         content: '';
@@ -67,6 +67,14 @@
           display: block;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .tabs {
+    .product_tabs {
+      overflow: scroll;
     }
   }
 }

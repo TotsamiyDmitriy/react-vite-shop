@@ -57,3 +57,10 @@
     }
   }
 }
+
+@media screen and (max-width: 769px) {
+  .filter__container {
+    width: auto;
+    padding: 0 20px;
+  }
+}

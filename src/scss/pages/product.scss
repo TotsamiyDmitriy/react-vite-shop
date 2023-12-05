@@ -362,6 +362,16 @@
 
 @media screen and (max-width: 769px) {
   .product {
+    margin: 0;
+    margin: 10px;
     padding-top: 60px;
+    flex-direction: column;
+    &_images {
+      padding: 0;
+      height: 400px;
+      &__selectImage {
+        padding: 10px;
+      }
+    }
   }
 }

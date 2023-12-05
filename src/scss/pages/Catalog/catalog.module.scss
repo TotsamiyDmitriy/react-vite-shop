@@ -5,6 +5,7 @@
     width: 100%;
     margin: 0 auto;
     .settings {
+      width: 100%;
       display: flex;
       justify-content: flex-end;
       flex-direction: row;
@@ -12,7 +13,7 @@
       font-weight: 900;
 
       align-items: center;
-      margin: 38px 50px;
+      margin: 38px 0;
       .filters {
         border-radius: 15px;
         padding: 10px 20px;
@@ -51,5 +52,18 @@
     margin-top: 20px;
     flex-direction: row;
     justify-content: center;
+  }
+}
+
+@media screen and (max-width: 901px) {
+  .main {
+    .container {
+      .settings {
+        justify-content: center;
+        .filters {
+          margin-right: 20px;
+        }
+      }
+    }
   }
 }

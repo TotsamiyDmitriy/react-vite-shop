@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { setCategory, setPage, setSortBy } from '../redux/catalogSlice';
 import styles from '../scss/pages/Catalog/catalog.module.scss';
 import { useParams, useSearchParams } from 'react-router-dom';
+import useWindowSize from '../hooks/useWindowSize';
 import { Pagination } from '@mui/material';
 
 const Catalog: React.FC = () => {
@@ -11,13 +12,23 @@ const Catalog: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const size = useWindowSize();
+  console.log(size.width);
+
   const [filtersBtn, setFiltersBtn] = React.useState(false);
+  const [_filtersModal, setFiltersModal] = React.useState(false);
+  const [_searchParams, setSearchParams] = useSearchParams();
+
+  const { id } = useParams();
 
   const RefSettings = React.useRef<HTMLDivElement>(null);
   const RefListSet = React.useRef<HTMLDivElement>(null);
-
   const filterHaldler = () => {
     setFiltersBtn(!filtersBtn);
+    if (size.width <= 769) {
+      const body = document.body;
+      body?.classList.toggle('disabled');
+    }
     const settingsNode = RefSettings.current!;
     const listSetNode = RefListSet.current!;
     settingsNode.classList.toggle('active');
@@ -39,10 +50,6 @@ const Catalog: React.FC = () => {
     pageCount: catalogReducer.pageCount,
     status: catalogReducer.status,
   }));
-
-  const { id } = useParams();
-
-  const [_searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     dispatch(setCategory(id));
@@ -74,6 +81,8 @@ const Catalog: React.FC = () => {
         </div>
         <div className={styles.wrapper}>
           <CatalogSettings
+            filterHaldler={filterHaldler}
+            setFiltersModal={setFiltersModal}
             uniqueProducts={state.uniqueProducts}
             reference={RefSettings}></CatalogSettings>
           <CatalogList

@@ -11,7 +11,7 @@ const categories: String[] = ['Men', 'Women', 'Kids'];
 interface IHeader {
   [key: string]: any;
   burgerState: boolean;
-  setBurgerState: (burgerState: boolean) => void;
+  setBurgerState: React.Dispatch<any>;
 }
 
 const Header: React.FC<IHeader> = ({ burgerState, setBurgerState }) => {
