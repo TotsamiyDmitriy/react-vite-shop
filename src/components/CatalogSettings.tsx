@@ -9,8 +9,8 @@ import { clearAllFilters } from '../redux/catalogSlice';
 interface IFilter {
   uniqueProducts: ProductType[];
   reference: LegacyRef<HTMLDivElement>;
-  setFiltersModal: React.Dispatch<any>;
-  filterHaldler: () => any;
+  setFiltersModal: React.Dispatch<boolean>;
+  filterHaldler: () => void;
 }
 const keys = ['brandName', 'offers'];
 

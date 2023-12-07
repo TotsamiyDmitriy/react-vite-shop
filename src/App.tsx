@@ -71,15 +71,15 @@ const App: React.FC = () => {
   ]);
   useEffect(() => {
     dispatch(fetchUniqueProducts(state));
-  }, [state.category]);
+  }, [dispatch, state.category]);
 
   useEffect(() => {
     dispatch(fetchCurrentProducts());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchSearchProducts(state));
-  }, [state.searchAll]);
+  }, [dispatch, state.searchAll]);
 
   useEffect(() => {
     if (!isMounted.current) {
@@ -110,7 +110,7 @@ const App: React.FC = () => {
         listener();
       };
     });
-  }, []);
+  }, [dispatch]);
 
   const handleClose = () => {
     dispatch(setOpenModal(false));

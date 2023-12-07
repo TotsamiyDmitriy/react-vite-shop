@@ -16,7 +16,7 @@ const Tabs: React.FC<ITabs> = ({ rewiews, allRating }) => {
   const [chooseTab, setChooseTab] = React.useState(0);
   const [rating, setRating] = React.useState(NaN);
 
-  function ratingHandler(_: any, value: number | null) {
+  function ratingHandler(_e: React.SyntheticEvent<Element, Event>, value: number | null) {
     if (value !== null) {
       setRating(value);
     }

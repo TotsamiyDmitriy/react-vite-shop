@@ -5,13 +5,15 @@ import { setSortBy } from '../redux/catalogSlice';
 
 interface SortI {
   sort: string;
-  setSort: Function;
+  setSort: React.Dispatch<Sort>;
 }
+
+type Sort = { title: string; request: string };
 
 const SortBy: React.FC<SortI> = ({ sort }) => {
   const dispatch = useAppDispatch();
 
-  const sortType = [
+  const sortType: Sort[] = [
     { title: 'Popularity', request: '_sort=rating&_order=desc' },
     { title: 'Price - Low to High', request: '_sort=price&_order=asc' },
     { title: 'Price - High to Low', request: '_sort=price&_order=desc' },

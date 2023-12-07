@@ -6,12 +6,12 @@ import { useAppDispatch } from '../../redux/hooks';
 import { reloadFilters } from '../../redux/catalogSlice';
 import { setOpenModal } from '../../redux/authSlice';
 
-const categories: String[] = ['Men', 'Women', 'Kids'];
+const categories: string[] = ['Men', 'Women', 'Kids'];
 
 interface IHeader {
-  [key: string]: any;
+  [key: string]: React.Dispatch<boolean> | boolean;
   burgerState: boolean;
-  setBurgerState: React.Dispatch<any>;
+  setBurgerState: React.Dispatch<boolean>;
 }
 
 const Header: React.FC<IHeader> = ({ burgerState, setBurgerState }) => {
@@ -62,7 +62,7 @@ const Header: React.FC<IHeader> = ({ burgerState, setBurgerState }) => {
               onClickLink={HandlerReload}
               handlerModal={HandlerModal}
               className="mobile_profile"></Profile>
-            {categories.map((el: String, id) => {
+            {categories.map((el: string, id) => {
               return (
                 <NavLink
                   onClick={HandlerReload}

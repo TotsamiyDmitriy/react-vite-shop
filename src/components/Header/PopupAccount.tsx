@@ -5,7 +5,7 @@ import { getAuth, signOut } from 'firebase/auth';
 
 interface IPopupAccount {}
 
-const PopupAccount: React.FC<IPopupAccount> = ({}) => {
+const PopupAccount: React.FC<IPopupAccount> = () => {
   const { email } = useAuth();
 
   const handlerSignOut = () => {
